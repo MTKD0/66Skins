@@ -1,5 +1,5 @@
-import { getChatGPTUser } from "@/app/chatgpt-auth";
 import { boxAssets, boxes } from "@/app/classic-box/box-data";
+import { currentUser } from "@/db/game-auth";
 import { addRecentDrops, listRecentDrops, type RecentDropRecord } from "@/db/recent-drops";
 
 type ItemTone = RecentDropRecord["rarity"];
@@ -44,8 +44,8 @@ export async function POST(request: Request) {
     const start = Math.max(0, openedBox.id - 1);
     const contents = Array.from({ length: 10 }, (_, index) => boxes[(start + index) % boxes.length])
       .sort((left, right) => Number(right.itemValue) - Number(left.itemValue));
-    const user = await getChatGPTUser();
-    const userName = (user?.displayName || "玩家121").trim().slice(0, 40);
+    const user = await currentUser(request);
+    const userName = (user?.nickname || "玩家121").trim().slice(0, 40);
     const records = itemIds.flatMap((itemId) => {
       const item = boxes.find((candidate) => candidate.id === itemId);
       const itemIndex = contents.findIndex((candidate) => candidate.id === itemId);

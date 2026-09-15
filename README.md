@@ -53,6 +53,7 @@ node scripts/test-game-online.mjs
 
 ```text
 app/          页面、界面组件和 API 路由
+config/       部署绑定配置
 db/           数据库访问层
 drizzle/      D1 数据库迁移
 data/         饰品目录、市场价格与来源说明
