@@ -1,0 +1,3 @@
+import { authenticate,currentUser,publicUser,logout,failure } from "@/db/game-auth";
+export async function GET(request:Request) { try { const u=await currentUser(request);return Response.json({user:u ? publicUser(u) : null},{headers:{"cache-control":"no-store"}}); } catch(e){return failure(e);} }
+export async function POST(request:Request) { try { const body=await request.json(); if(!body||typeof body!=="object")return Response.json({error:"无效操作"},{status:400});if(body.action==="logout")return await logout(request);if(!["login","register"].includes(body.action))return Response.json({error:"无效操作"},{status:400});return await authenticate(request,body); }catch(e){return failure(e);} }

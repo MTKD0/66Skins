@@ -1,0 +1,143 @@
+.backpack-shell {
+  min-height: 100vh;
+  color: #4e4a68;
+  background-color: #f4f3fb;
+}
+
+.backpack-balance { display: flex; margin-left: 18px; flex-direction: column; align-items: flex-end; color: #fff; line-height: 1.1; }
+.backpack-balance b { font-size: 18px; font-weight: 500; }
+.backpack-balance small { margin-top: 5px; color: #e7bd54; font-size: 14px; }
+
+.backpack-page {
+  width: min(1880px, calc(100% - 92px));
+  min-height: calc(100vh - 186px);
+  margin: 40px auto 80px;
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  align-items: start;
+  gap: 36px;
+}
+
+.profile-panel {
+  position: sticky;
+  top: 92px;
+  min-height: max(1040px, calc(100vh - 128px));
+  overflow: hidden;
+  padding-top: 38px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 22% 38%, rgba(255,255,255,.09) 0 2px, transparent 3px),
+    linear-gradient(155deg, #726da5, #565184 58%, #474269);
+  box-shadow: 0 12px 34px rgba(67,60,112,.15);
+  clip-path: polygon(8% 0, 92% 0, 100% 2%, 100% 98%, 92% 100%, 8% 100%, 0 98%, 0 2%);
+}
+.profile-panel::before { content: "66SKINS"; position: absolute; left: -6px; top: 268px; color: rgba(255,255,255,.055); font-size: 59px; font-weight: 900; transform: rotate(-90deg); }
+.profile-panel::after { content: ""; position: absolute; right: -86px; bottom: -72px; width: 250px; height: 250px; opacity: .13; border: 42px solid #fff; border-radius: 50%; box-shadow: 0 0 0 28px rgba(255,255,255,.42), 0 0 0 62px rgba(255,255,255,.22); pointer-events: none; }
+.profile-avatar { position: relative; z-index: 1; width: 118px; height: 118px; margin: 0 auto 18px; padding: 9px; border: 7px solid #f0714f; border-radius: 50%; background: rgba(255,255,255,.12); box-shadow: 0 0 0 1px rgba(255,255,255,.16), 0 8px 20px rgba(34,27,69,.2); }
+.profile-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.profile-name, .profile-id { position: relative; z-index: 1; display: block; text-align: center; }
+.profile-name { font-size: 20px; }
+.profile-id { margin-top: 17px; font-size: 14px; font-weight: 700; }
+.profile-icons { position: relative; z-index: 1; display: flex; margin: 22px 0 28px; justify-content: center; gap: 16px; }
+.profile-icons i { display: grid; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.18); font-style: normal; font-size: 18px; place-items: center; }
+.profile-icons i:last-child { color: #fff; background: #f17456; }
+.profile-panel nav { position: relative; z-index: 2; display: flex; flex-direction: column; }
+.profile-panel nav button { position: relative; height: 82px; padding: 0 0 0 82px; border: 0; color: #fff; background: transparent; text-align: left; font-size: 21px; font-weight: 800; cursor: pointer; }
+.profile-panel nav button:hover { background: rgba(255,255,255,.07); }
+.profile-panel nav button.active { background: linear-gradient(90deg, rgba(43,36,69,.92), rgba(44,38,68,.62)); text-shadow: 0 0 8px rgba(255,115,78,.5); }
+.profile-panel nav button.active::before { content: ""; position: absolute; left: 0; top: 0; width: 10px; height: 100%; background: #ef7657; box-shadow: 4px 0 10px rgba(239,118,87,.45); clip-path: polygon(0 0, 100% 8%, 100% 92%, 0 100%); }
+
+.backpack-workspace { min-width: 0; }
+.trade-settings, .inventory-panel { position: relative; border: 1px solid rgba(202,204,222,.44); background: rgba(255,255,255,.91); box-shadow: 0 13px 34px rgba(84,78,132,.07); }
+.trade-settings { min-height: 230px; padding: 38px 42px 32px; border-top: 2px solid #e6876c; clip-path: polygon(0 10px, 20% 10px, 21% 0, 99% 0, 100% 10px, 100% 100%, 0 100%); }
+.trade-settings h1 { display: flex; margin: 0 0 26px; align-items: center; gap: 12px; color: #e45f37; font-size: 25px; font-style: italic; }
+.trade-settings h1 i { display: block; width: 55px; height: 20px; opacity: .35; background: repeating-linear-gradient(70deg, #f07b5b 0 5px, transparent 5px 9px); transform: skewX(-14deg); }
+.trade-settings h1 span { display: block; width: 170px; height: 12px; margin-left: 5px; border-top: 6px solid #d5eef7; transform: skewX(30deg); }
+.trade-row { display: grid; grid-template-columns: minmax(0, 1fr) 250px; }
+.trade-row input { min-width: 0; height: 61px; padding: 0 18px; border: 1px solid #b4d5e2; outline: 0; color: #68a7ca; background: rgba(232,249,255,.72); font-size: 17px; }
+.trade-row input:focus { border-color: #e97d5f; box-shadow: inset 0 0 0 1px #e97d5f; }
+.trade-row button { border: 0; color: #fff; background: linear-gradient(135deg, #f28a68, #e96949); font-size: 20px; cursor: pointer; clip-path: polygon(8% 0, 100% 0, 100% 82%, 92% 100%, 0 100%, 0 18%); }
+.trade-row button:hover { filter: brightness(1.06); }
+.trade-settings p { margin: 14px 0 0; color: #aaa9b3; font-size: 14px; }
+
+.inventory-panel { min-height: max(760px, calc(100vh - 386px)); margin-top: 32px; border: 0; background: rgba(255,255,255,.94); }
+.inventory-tabs { position: relative; display: flex; height: 64px; padding-right: 62px; align-items: stretch; background: transparent; }
+.inventory-tabs > button:not(.refresh-inventory) { width: 290px; border: 1px solid #c7dce8; color: #77748f; background: rgba(225,245,251,.86); font-size: 23px; cursor: pointer; clip-path: polygon(0 0, 88% 0, 100% 100%, 8% 100%); }
+.inventory-tabs > button:first-child { clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%); }
+.inventory-tabs > button.active { z-index: 1; border-color: #f07d59; color: #fff; background: linear-gradient(135deg, #f9a05f, #e85e3c); }
+.refresh-inventory { position: absolute; right: 16px; top: 8px; width: 48px; height: 48px; border: 0; color: #59566c; background: transparent; font-size: 34px; cursor: pointer; }
+.inventory-toolbar { display: grid; height: 72px; padding: 17px 25px; grid-template-columns: 120px minmax(240px, 1fr) auto; align-items: center; gap: 24px; border-bottom: 1px solid #e6e5ee; }
+.inventory-toolbar span { color: #79758b; }
+.inventory-toolbar span b { margin-left: 5px; color: #e97958; font-weight: 500; }
+.inventory-toolbar select { height: 42px; padding: 0 14px; border: 1px solid #cfcfdf; color: #77758d; background: #fff; font-size: 14px; }
+.inventory-toolbar label { display: flex; align-items: center; gap: 8px; font-size: 16px; cursor: pointer; }
+.inventory-toolbar input { width: 22px; height: 22px; accent-color: #ef7657; }
+.inventory-layout { display: grid; min-height: max(630px, calc(100vh - 522px)); grid-template-columns: minmax(0, 1fr) 290px; }
+.inventory-grid { display: grid; padding: 24px; grid-template-columns: repeat(3, minmax(170px, 1fr)); align-content: start; gap: 16px; }
+.inventory-card { position: relative; min-width: 0; aspect-ratio: 1.08; overflow: hidden; padding: 8px 10px 32px; border: 1px solid #918fbd; color: #fff; background: linear-gradient(180deg, #d9f2fc 0 67%, #9792c8 67% 100%); cursor: pointer; clip-path: polygon(8% 0, 92% 0, 96% 4%, 100% 4%, 100% 96%, 96% 96%, 92% 100%, 8% 100%, 4% 96%, 0 96%, 0 4%, 4% 4%); box-shadow: inset 0 0 0 2px rgba(255,255,255,.4); text-align: left; }
+.inventory-card::before { content: ""; position: absolute; inset: 0; opacity: .24; background: radial-gradient(circle at 88% 18%, #fff 0 2px, transparent 3px), radial-gradient(circle at 80% 25%, #fff 0 1px, transparent 2px); pointer-events: none; }
+.inventory-card:hover { filter: brightness(1.04); transform: translateY(-2px); }
+.inventory-card.selected { outline: 4px solid #f06e49; box-shadow: inset 0 0 0 3px #f06e49, 0 4px 14px rgba(236,102,67,.26); }
+.inventory-card img { position: relative; z-index: 1; display: block; width: 100%; height: 68%; object-fit: contain; }
+.inventory-card p { position: absolute; z-index: 1; left: 12px; right: 10px; bottom: 25px; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; }
+.inventory-card > b { position: absolute; z-index: 1; left: 12px; bottom: 7px; color: #e7e59c; font-size: 14px; font-weight: 500; }
+.inventory-card > b i { display: inline-grid; width: 17px; height: 17px; margin-right: 5px; border: 2px solid #dad764; place-items: center; font-size: 9px; font-style: normal; transform: rotate(30deg); }
+.inventory-card > b i::first-letter { transform: rotate(-30deg); }
+.inventory-check { position: absolute; z-index: 3; right: 8px; top: 8px; display: none; width: 25px; height: 25px; border-radius: 50%; color: #fff; background: #ef704d; font-size: 16px; place-items: center; }
+.inventory-card.selected .inventory-check { display: grid; }
+.inventory-empty { grid-column: 1 / -1; display: grid; min-height: 250px; padding: 40px; color: #9996ad; text-align: center; line-height: 1.7; place-items: center; }
+
+.selected-tray { position: relative; display: flex; min-width: 0; min-height: max(630px, calc(100vh - 522px)); padding: 0; flex-direction: column; color: #fff; background: linear-gradient(180deg, #a09bd2, #827dab); border-left: 8px solid #fff; }
+.selected-tray h2 { height: 90px; margin: 0; display: flex; align-items: center; justify-content: center; color: #e65f3a; background: rgba(255,255,255,.96); font-size: 24px; font-style: italic; }
+.selected-tray h2 b { margin-left: 7px; color: #e65f3a; }
+.selected-tray > div { display: flex; max-height: 285px; padding: 16px; overflow-y: auto; flex-direction: column; gap: 8px; }
+.selected-tray > div span { display: grid; min-height: 55px; padding: 5px 8px; grid-template-columns: 62px minmax(0, 1fr); align-items: center; gap: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,.25); background: rgba(65,58,112,.22); text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+.selected-tray > div img { width: 62px; height: 45px; object-fit: contain; }
+.selected-tray footer { margin-top: auto; padding: 18px; background: rgba(48,43,88,.24); }
+.selected-tray footer p { margin: 0 0 13px; text-align: center; font-size: 16px; }
+.selected-tray footer button { width: 100%; height: 43px; margin-top: 8px; border: 0; color: #fff; background: #f2a02d; font-size: 15px; cursor: pointer; clip-path: polygon(5% 0, 95% 0, 100% 20%, 100% 80%, 95% 100%, 5% 100%, 0 80%, 0 20%); }
+.selected-tray footer button:last-child { background: #e76c4d; }
+.selected-tray footer button:hover { filter: brightness(1.07); }
+
+.history-list { min-height: max(630px, calc(100vh - 522px)); padding: 24px; }
+.history-list article { display: grid; min-height: 96px; padding: 10px 18px; grid-template-columns: 110px minmax(0, 1fr) auto; align-items: center; gap: 16px; border-bottom: 1px solid #e3e3ec; color: #68657d; }
+.history-list article img { width: 100px; height: 74px; object-fit: contain; background: #e5f5fc; }
+.history-list article span { display: flex; min-width: 0; flex-direction: column; gap: 7px; }
+.history-list article b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.history-list article small { color: #aaa7b4; }
+.history-list article strong { color: #e36d49; font-size: 16px; }
+
+@media (min-width: 1550px) {
+  .inventory-grid { grid-template-columns: repeat(4, minmax(170px, 1fr)); }
+}
+@media (max-width: 1180px) {
+  .backpack-page { width: calc(100% - 88px); grid-template-columns: 220px minmax(0, 1fr); gap: 24px; }
+  .profile-panel nav button { height: 72px; padding-left: 58px; font-size: 18px; }
+  .inventory-grid { grid-template-columns: repeat(2, minmax(160px, 1fr)); }
+  .trade-row { grid-template-columns: minmax(0, 1fr) 180px; }
+}
+@media (max-width: 860px) {
+  .backpack-page { width: calc(100% - 28px); margin-top: 24px; display: block; }
+  .profile-panel { position: relative; top: 0; min-height: 0; margin-bottom: 24px; padding: 22px; display: grid; grid-template-columns: 76px 1fr; align-items: center; }
+  .profile-avatar { width: 70px; height: 70px; margin: 0; padding: 4px; border-width: 4px; grid-row: 1 / 3; }
+  .profile-name, .profile-id { text-align: left; }
+  .profile-icons, .profile-panel nav { display: none; }
+  .trade-settings { padding: 30px 22px 24px; }
+  .trade-row { grid-template-columns: 1fr; }
+  .trade-row button { height: 52px; }
+  .inventory-layout { grid-template-columns: 1fr; }
+  .selected-tray { min-height: 280px; border-top: 8px solid #fff; border-left: 0; }
+}
+@media (max-width: 560px) {
+  .backpack-page { margin-top: 15px; }
+  .trade-settings h1 { font-size: 20px; }
+  .trade-settings h1 i, .trade-settings h1 span { display: none; }
+  .inventory-tabs > button:not(.refresh-inventory) { width: 44%; font-size: 18px; }
+  .inventory-toolbar { height: auto; grid-template-columns: 1fr auto; gap: 10px; }
+  .inventory-toolbar select { grid-column: 1 / -1; grid-row: 2; }
+  .inventory-grid { padding: 12px; grid-template-columns: repeat(2, minmax(125px, 1fr)); gap: 10px; }
+  .inventory-card p { font-size: 12px; }
+  .history-list article { grid-template-columns: 80px minmax(0, 1fr); }
+  .history-list article img { width: 74px; }
+  .history-list article strong { grid-column: 2; }
+}

@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1786867200000,
+      "tag": "0000_accessories",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1786877124957,
+      "tag": "0001_conscious_gateway",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1786880762299,
+      "tag": "0002_material_landau",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1787318400000,
+      "tag": "0003_market_prices",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1788864040192,
+      "tag": "0004_overrated_radioactive_man",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+import assert from 'node:assert/strict';
+const base='http://localhost:3001';const stamp=Date.now();
+async function call(path,body,cookie){const r=await fetch(base+path,{method:body?'POST':'GET',headers:{'content-type':'application/json',...(cookie?{cookie}:{})},body:body?JSON.stringify(body):undefined});const data=await r.json();return {status:r.status,data,cookie:r.headers.get('set-cookie')?.split(';')[0]};}
+const password='Test'+crypto.randomUUID();
+const users=[];
+for(let i=0;i<3;i++){const name='qatest'+stamp+i;const r=await call('/api/auth',{action:'register',username:name,password,nickname:'对战测试'+i});assert.equal(r.status,200,JSON.stringify(r.data));assert.equal(r.data.user.balance,1000);users.push({...r.data.user,cookie:r.cookie,account:name});}
+console.log('PASS register, server session, initial balance');
+const [a,b,c]=users;
+assert.equal((await call('/api/auth',{action:'login',username:a.account,password:'WrongPassword'})).status,401);
+assert.equal((await call('/api/auth',{action:'register',username:a.account,password,nickname:'重复'})).status,409);
+assert.equal((await call('/api/battles')).status,401);
+console.log('PASS wrong password, duplicate account, unauthenticated access');
+assert.equal((await call('/api/auth',{action:'register',username:'invalid_account',password,nickname:'测试'})).status,400);
+assert.equal((await call('/api/auth',{action:'register',username:'missing'+stamp,password,nickname:''})).status,400);
+assert.equal((await call('/api/auth',{action:'register',username:'short'+stamp,password:'123',nickname:'测试'})).status,400);
+assert.equal((await call('/api/auth',{action:'login',username:a.account.toUpperCase(),password})).data.user.id,a.id);
+const prices=(await call('/api/classic-boxes')).data.values;
+assert.ok(prices.length>0);
+for(const price of prices){assert.ok(price.priceSource);assert.equal(price.itemValue,Math.round(price.priceCny/6.5*100)/100);}
+console.log('PASS required fields, account normalization, canonical database currency conversion');
+const req={action:'create',boxIds:[1],robot:false,requestId:crypto.randomUUID()};
+const create=await call('/api/battles',req,a.cookie);assert.equal(create.status,200,JSON.stringify(create.data));const room=create.data.room;
+assert.equal(room.status,'waiting');assert.equal(room.robot,false);
+assert.ok((await call('/api/battles',null,b.cookie)).data.rooms.some(r=>r.id===room.id));
+for(const item of room.catalog){const price=prices.find(p=>p.boxId===item.id);assert.equal(Number(item.itemValue),price.itemValue);assert.equal(Number(item.price),price.boxPrice);assert.equal(item.priceSource,price.priceSource);}
+assert.equal((await call('/api/battles',req,a.cookie)).data.room.id,room.id);
+assert.equal((await call('/api/auth',null,a.cookie)).data.user.balance,1000-room.entry);
+assert.equal((await call('/api/battles?id='+encodeURIComponent(room.id),null,c.cookie)).status,403);
+console.log('PASS create, idempotent charge, ownership');
+const join=await call('/api/battles',{action:'join',id:room.id,requestId:crypto.randomUUID()},b.cookie);assert.equal(join.status,200,JSON.stringify(join.data));
+assert.equal((await call('/api/battles',{action:'join',id:room.id,requestId:crypto.randomUUID()},b.cookie)).status,200);
+assert.equal((await call('/api/battles',{action:'join',id:room.id,requestId:crypto.randomUUID()},c.cookie)).status,409);
+assert.equal((await call('/api/auth',null,b.cookie)).data.user.balance,1000-room.entry);
+console.log('PASS second account joins, third player rejected');
+await new Promise(r=>setTimeout(r,4000));
+const av=(await call('/api/battles?id='+encodeURIComponent(room.id),null,a.cookie)).data.room;
+const bv=(await call('/api/battles?id='+encodeURIComponent(room.id),null,b.cookie)).data.room;
+assert.deepEqual(av.results,bv.results);assert.equal(av.results.length,1);
+for(const item of [av.results[0].left,av.results[0].right])assert.equal(item.itemValue,av.catalog.find(i=>i.id===item.id).itemValue);
+console.log('PASS shared round and database price snapshot');
+await new Promise(r=>setTimeout(r,6500));
+const end=(await call('/api/battles?id='+encodeURIComponent(room.id),null,a.cookie)).data.room;assert.equal(end.status,'finished');
+await call('/api/battles?id='+encodeURIComponent(room.id),null,b.cookie);
+const bagA=(await call('/api/backpack',null,a.cookie)).data.items;const bagB=(await call('/api/backpack',null,b.cookie)).data.items;
+assert.equal(bagA.length+bagB.length,2);assert.equal((await call('/api/backpack',null,c.cookie)).data.items.length,0);
+const values=[...bagA,...bagB].map(i=>i.value).sort((x,y)=>x-y);assert.deepEqual(values,[Number(end.results[0].left.itemValue),Number(end.results[0].right.itemValue)].sort((x,y)=>x-y));
+console.log('PASS server settlement, no duplicate awards, owned inventory, matching price');
+const cancel=(await call('/api/battles',{...req,requestId:crypto.randomUUID()},c.cookie)).data.room;
+await call('/api/battles',{action:'cancel',id:cancel.id,requestId:crypto.randomUUID()},c.cookie);
+await call('/api/battles',{action:'cancel',id:cancel.id,requestId:crypto.randomUUID()},c.cookie);
+assert.equal((await call('/api/auth',null,c.cookie)).data.user.balance,1000);
+const owner=bagA.length?a:b;const bag=bagA.length?bagA:bagB;
+const recycle=await call('/api/backpack',{action:'recycle',ids:[bag[0].id]},owner.cookie);assert.equal(recycle.data.count,1);
+assert.equal((await call('/api/backpack',{action:'recycle',ids:[bag[0].id]},owner.cookie)).data.count,0);
+console.log('PASS cancellation refund and recycle idempotency');
+await call('/api/auth',{action:'logout'},a.cookie);assert.equal((await call('/api/auth',null,a.cookie)).data.user,null);
+console.log('PASS logout invalidates session');
+console.log('TEST_ACCOUNT_PREFIX qatest'+stamp);

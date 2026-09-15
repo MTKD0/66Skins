@@ -1,0 +1,161 @@
+.lucky-detail-shell { min-height: 100vh; color: #4b4968; background: #f4f5ff url("/assets/home-background.png") center 235px / 150% auto no-repeat fixed; }
+.lucky-detail-balance { display: flex; color: #f8dc77; flex-direction: column; align-items: flex-end; line-height: 1.2; }
+.lucky-detail-balance b { color: #fff; font-size: 16px; }
+.lucky-detail-balance small { font-size: 13px; }
+.lucky-detail-page { min-height: 1180px; padding: 0 84px 100px; }
+
+.lucky-chamber { position: relative; width: min(1660px, calc(100vw - 126px)); height: 690px; margin: 0 auto; overflow: hidden; background: #e9edff url("/assets/lucky/lucky-chamber-bg-v2.png") center / 100% 100% no-repeat; box-shadow: inset 0 0 0 2px rgba(255,255,255,.74), 0 18px 46px rgba(72,83,142,.16); clip-path: polygon(5% 0, 95% 0, 100% 12%, 100% 91%, 91% 100%, 9% 100%, 0 91%, 0 12%); }
+.lucky-chamber::before { position: absolute; z-index: 1; inset: 0; content: ""; pointer-events: none; background: radial-gradient(circle at 50% 49%, rgba(115,225,255,.17), transparent 24%), linear-gradient(180deg, rgba(255,255,255,.04), rgba(73,86,159,.08)); }
+.lucky-chamber h1 { position: relative; z-index: 3; width: 470px; margin: 28px auto 0; padding: 13px 45px; color: white; background: linear-gradient(90deg, transparent, #365fba 16% 84%, transparent); font-size: 25px; font-weight: 500; text-align: center; clip-path: polygon(9% 0, 91% 0, 100% 50%, 91% 100%, 9% 100%, 0 50%); }
+.lucky-back { position: absolute; z-index: 6; top: 35px; right: 8%; border: 0; color: #706ab3; background: transparent; font-size: 18px; cursor: pointer; }
+.chamber-corner { position: absolute; z-index: 6; top: 96px; width: 350px; height: 136px; pointer-events: none; }
+.chamber-corner.left { left: 5.2%; }
+.chamber-corner.right { right: 5.2%; }
+.chamber-item-frame { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: fill; filter: drop-shadow(0 7px 8px rgba(38,45,96,.2)); }
+.chamber-corner.right .chamber-item-frame { transform: scaleX(-1); }
+.chamber-item-art { position: absolute; z-index: 2; top: 10px; left: 50%; width: 214px; height: 82px; object-fit: contain; filter: drop-shadow(0 5px 5px rgba(28,40,88,.3)); transform: translateX(-50%); }
+.chamber-item-art.mystery { top: 4px; width: 96px; height: 94px; }
+.chamber-corner span { position: absolute; z-index: 3; right: 10%; bottom: 11px; left: 10%; overflow: hidden; color: white; font-size: 13px; text-align: center; text-overflow: ellipsis; white-space: nowrap; text-shadow: 0 1px 2px rgba(28,35,82,.8); }
+.probability-side { --tube-panel-height: 324px; position: absolute; z-index: 3; bottom: 66px; width: 28.2%; height: var(--tube-panel-height); overflow: hidden; }
+.probability-side.success { left: .6%; }
+.probability-side.failure { right: .6%; }
+.probability-frame-svg { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; filter: drop-shadow(0 9px 10px rgba(38,43,94,.2)); }
+.tube-metal-shell, .tube-metal-rim, .tube-empty-channel, .tube-contained-liquid, .tube-liquid-reflection { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.tube-metal-shell { stroke-width: 92px; }
+.tube-metal-rim { stroke: #555a86; stroke-width: 72px; }
+.tube-empty-channel { stroke: #111a3b; stroke-width: 54px; }
+.tube-contained-liquid { stroke-width: 34px; }
+.tube-liquid-reflection { stroke: rgba(255,255,255,.58); stroke-width: 5px; }
+.tube-liquid-clip { y: var(--liquid-y); height: var(--liquid-height); transition: y .48s cubic-bezier(.2,.8,.2,1), height .48s cubic-bezier(.2,.8,.2,1); }
+.probability-copy { position: absolute; z-index: 4; top: 108px; left: 24%; pointer-events: none; }
+.probability-side.failure .probability-copy { right: 24%; left: auto; text-align: right; }
+.probability-copy b { display: block; color: white; font-size: 30px; font-weight: 500; text-shadow: 0 2px 5px rgba(31,36,78,.35); }
+.probability-copy b small { margin-left: 8px; color: rgba(35,42,89,.38); font-size: 21px; font-style: italic; }
+.probability-copy strong { display: block; margin-top: 16px; color: #ffe46c; font-size: 64px; font-weight: 400; line-height: 1; text-shadow: 0 2px 10px rgba(80,54,9,.22); }
+.probability-side.failure .probability-copy strong { color: #baf1ff; text-shadow: 0 2px 10px rgba(21,75,116,.25); }
+.lucky-capsule { position: absolute; z-index: 5; top: 150px; left: 50%; width: 300px; height: 300px; pointer-events: none; filter: drop-shadow(0 14px 12px rgba(35,47,103,.27)) drop-shadow(0 0 20px rgba(75,218,255,.48)); transform: translateX(-50%); animation: lucky-chest-float 3.2s ease-in-out infinite; }
+.lucky-capsule img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.probability-control { position: absolute; z-index: 8; right: 25%; bottom: 84px; left: 25%; }
+.probability-control input { position: relative; z-index: 2; width: 100%; height: 34px; margin: 0; appearance: none; border: 6px solid #525b9d; border-radius: 3px; outline: 3px solid rgba(255,255,255,.82); background: linear-gradient(90deg, #ffc94a 0 var(--probability), #567bdd var(--probability) 100%); cursor: pointer; }
+.probability-control input::-webkit-slider-thumb { width: 34px; height: 54px; appearance: none; border: 5px solid #fff1ac; background: #606997; box-shadow: 0 0 9px #ffd85d; clip-path: polygon(50% 0, 100% 22%, 100% 78%, 50% 100%, 0 78%, 0 22%); }
+.probability-control input::-moz-range-thumb { width: 30px; height: 50px; border: 5px solid #fff1ac; border-radius: 0; background: #606997; }
+.probability-ticks { position: absolute; right: 17px; bottom: 12px; left: 17px; display: flex; justify-content: space-between; pointer-events: none; }
+.probability-ticks i { width: 1px; height: 10px; background: rgba(255,255,255,.45); }
+.lucky-start { display: block; min-width: 330px; height: 82px; margin: -4px auto 28px; border: 5px solid #bd6a22; color: #a44313; background: linear-gradient(135deg, #ffe8a7, #ffc65e 54%, #ffe8a7); box-shadow: inset 0 0 0 4px #ffe4a1, 0 6px 13px rgba(82,58,91,.2); font-size: 27px; cursor: pointer; clip-path: polygon(7% 0, 93% 0, 100% 25%, 100% 75%, 93% 100%, 7% 100%, 0 75%, 0 25%); }
+.lucky-start i, .quality-card strong i { display: inline-grid; width: 22px; height: 22px; margin-right: 7px; border: 2px solid currentColor; font-size: 10px; font-style: normal; place-items: center; transform: rotate(30deg); }
+.lucky-detail-notice { display: flex; width: min(1440px, 100%); min-height: 56px; margin: 0 auto 20px; padding: 10px 15px; border: 1px solid #aedbec; color: #6a6982; background: rgba(238,250,255,.9); align-items: center; gap: 10px; }
+.lucky-detail-notice b { display: grid; width: 22px; height: 22px; border-radius: 50%; color: white; background: #9297d2; place-items: center; }
+.lucky-record-panel { width: min(1440px, 100%); min-height: 520px; margin: 0 auto; padding: 22px 34px 40px; border: 2px solid #d99072; background: rgba(255,255,255,.72); }
+.quality-heading { display: flex; margin-bottom: 18px; align-items: baseline; gap: 20px; }
+.quality-heading b { color: #e16532; font-size: 25px; }
+.quality-heading span { color: #89879c; font-size: 13px; }
+.quality-grid { display: grid; width: min(930px, 100%); gap: 14px; grid-template-columns: repeat(3, 1fr); }
+.quality-card { position: relative; min-height: 220px; padding: 10px 16px 14px; overflow: hidden; border: 3px solid #66628b; color: #fff; background: linear-gradient(180deg, #918dac, #706d91 69%, #5d587a 70%); text-align: left; cursor: pointer; clip-path: polygon(6% 0, 94% 0, 100% 8%, 100% 92%, 94% 100%, 6% 100%, 0 92%, 0 8%); }
+.quality-card.active { border-color: #ff7145; background: linear-gradient(180deg, #9a8294, #776779 69%, #c95e3d 70%); box-shadow: 0 0 20px rgba(255,103,61,.34); }
+.quality-card.active::after { position: absolute; top: 5px; right: 8px; color: #ff7145; content: "✓"; font-size: 28px; font-weight: 900; }
+.quality-card img { display: block; width: 100%; height: 120px; object-fit: contain; filter: drop-shadow(0 8px 5px rgba(36,30,71,.3)); }
+.quality-card b { display: block; font-size: 20px; }
+.quality-card span { display: inline-block; width: 70%; margin-top: 7px; overflow: hidden; color: #f7f5ff; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.quality-card strong { float: right; margin-top: 3px; color: #ffe266; font-size: 17px; }
+.record-tabs { display: grid; width: min(650px, 100%); height: 54px; margin: 30px 0 22px; grid-template-columns: 1fr 1.25fr; }
+.record-tabs button { border: 1px solid #e57b54; color: #66617d; background: #edf8ff; font-size: 18px; cursor: pointer; clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%, 7% 50%); }
+.record-tabs button.active { color: white; background: linear-gradient(90deg, #f58a4d, #e55d2a); }
+.history-strip { display: flex; min-height: 190px; padding: 14px; overflow-x: auto; border: 1px solid #d9d7e6; background: rgba(240,248,255,.64); gap: 8px; }
+.history-strip article { flex: 0 0 116px; height: 155px; border: 2px solid #79c8e8; background: linear-gradient(180deg, #edfaff, #d6edff); text-align: center; }
+.history-strip article.success { border-color: #f0cc51; background: linear-gradient(180deg, #fffbe0, #fae9a8); }
+.history-strip article > div { display: flex; height: 38px; color: #5c6287; align-items: center; justify-content: space-around; }
+.history-strip article > div img { width: 30px; height: 30px; border-radius: 50%; }
+.history-strip article > img { width: 100%; height: 70px; padding: 3px; object-fit: contain; }
+.history-strip article span, .history-strip article time { display: block; overflow: hidden; color: #65647b; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.history-strip article time { margin-top: 4px; color: #9997ab; }
+.history-empty { display: flex; width: 100%; color: #8d8ba0; flex-direction: column; align-items: center; justify-content: center; }
+.history-empty img { width: 78px; height: 78px; object-fit: contain; opacity: .52; }
+.history-empty b { color: #625f83; }
+.history-empty span { margin-top: 5px; font-size: 12px; }
+
+.lucky-roll-overlay { position: fixed; z-index: 1000; inset: 0; display: grid; overflow: hidden; background: rgba(5,7,14,.88); backdrop-filter: blur(1px); place-items: center; animation: lucky-overlay-in .22s ease both; }
+.lucky-roll-scene { display: grid; width: 100%; place-items: center; }
+.lucky-roll-frame { position: relative; width: min(1730px, 95vw); height: 286px; padding: 48px 72px; overflow: hidden; background: linear-gradient(180deg, #eef2ff, #9ba3ca 9%, #24263f 11% 89%, #aeb6da 91%, #f5f6ff); filter: drop-shadow(0 20px 30px rgba(0,0,0,.5)); clip-path: polygon(4% 0, 96% 0, 100% 18%, 100% 82%, 96% 100%, 4% 100%, 0 82%, 0 18%); }
+.lucky-roll-window { position: relative; z-index: 2; width: 100%; height: 100%; overflow: hidden; border: 5px solid #202541; background: #111526; opacity: 0; box-shadow: inset 0 0 24px rgba(28,48,114,.8); transition: opacity .28s ease .16s; }
+.phase-rolling .lucky-roll-window, .phase-settled .lucky-roll-window { opacity: 1; }
+.lucky-roll-track { display: flex; width: max-content; height: 100%; will-change: transform; }
+.phase-rolling .lucky-roll-track, .phase-settled .lucky-roll-track { transition: transform 4.7s cubic-bezier(.08,.66,.08,1); }
+.lucky-roll-card { flex: 0 0 176px; width: 176px; height: 176px; border: 3px solid #4e74bb; background: linear-gradient(180deg, #c8e2ff, #71a1cf); }
+.lucky-roll-card.is-success { border-color: #e2af32; background: linear-gradient(180deg, #fff2ac, #d9b24d); }
+.lucky-roll-card img { width: 100%; height: 100%; padding: 18px 8px; object-fit: contain; filter: drop-shadow(0 9px 5px rgba(34,34,74,.28)); }
+.lucky-roll-card.is-question img { padding: 27px; }
+.lucky-roll-card.selected { z-index: 4; border: 6px solid #ff4b2f; box-shadow: 0 0 23px #ff5b35, inset 0 0 18px rgba(255,71,38,.3); animation: lucky-card-lock .25s ease 2 alternate; }
+.lucky-roll-selector { position: absolute; z-index: 8; top: 35px; bottom: 35px; left: 50%; width: 4px; background: #fff4a7; box-shadow: 0 0 8px #fff4a7; }
+.lucky-roll-selector::before, .lucky-roll-selector::after { position: absolute; left: 50%; width: 54px; height: 25px; content: ""; border: 4px solid #fff4a7; background: #5d6594; transform: translateX(-50%); clip-path: polygon(18% 0, 82% 0, 100% 50%, 82% 100%, 18% 100%, 0 50%); }
+.lucky-roll-selector::before { top: 0; }
+.lucky-roll-selector::after { bottom: 0; }
+.lucky-roll-door { position: absolute; z-index: 6; top: 42px; bottom: 42px; width: calc(50% - 70px); border: 3px solid #bdc5e7; background: linear-gradient(90deg, #202441, #464d79); transition: transform .58s cubic-bezier(.68,.01,.2,1); }
+.lucky-roll-door.left { left: 70px; clip-path: polygon(0 0, 100% 0, 94% 50%, 100% 100%, 0 100%); }
+.lucky-roll-door.right { right: 70px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 6% 50%); }
+.phase-rolling .lucky-roll-door.left, .phase-settled .lucky-roll-door.left { transform: translateX(-110%); }
+.phase-rolling .lucky-roll-door.right, .phase-settled .lucky-roll-door.right { transform: translateX(110%); }
+.lucky-roll-flash { position: absolute; z-index: 9; top: 50%; left: 50%; width: 210px; height: 210px; background: radial-gradient(circle, #fff 0 5%, #fffbd0 12%, rgba(165,196,255,.66) 30%, transparent 70%); transform: translate(-50%, -50%); transition: opacity .3s ease, transform .42s ease; animation: lucky-flash .65s ease-in-out infinite alternate; }
+.lucky-roll-flash::before { position: absolute; top: 50%; left: -230%; width: 560%; height: 3px; content: ""; background: linear-gradient(90deg, transparent, #9cb9ff, #fff, #9cb9ff, transparent); }
+.phase-rolling .lucky-roll-flash, .phase-settled .lucky-roll-flash { opacity: 0; transform: translate(-50%, -50%) scale(1.6); }
+
+.lucky-result { position: relative; width: min(1300px, 88vw); height: min(760px, 84vh); overflow: hidden; border: 2px solid rgba(239,190,92,.5); color: white; background: radial-gradient(circle at 50% 35%, rgba(151,102,112,.88), transparent 32%), linear-gradient(180deg, #242639f7, #1b2245f7); text-align: center; clip-path: polygon(2% 0, 98% 0, 100% 5%, 100% 95%, 98% 100%, 2% 100%, 0 95%, 0 5%); animation: result-grow .5s cubic-bezier(.15,.82,.24,1) both; }
+.result-close { position: absolute; z-index: 5; top: 25px; right: 38px; border: 0; color: white; background: transparent; font-size: 46px; cursor: pointer; }
+.result-rays { position: absolute; top: -100px; left: 50%; width: 730px; height: 400px; opacity: .48; background: repeating-conic-gradient(rgba(255,213,110,.85) 0 6deg, transparent 6deg 17deg); transform: translateX(-50%); -webkit-mask-image: linear-gradient(#000, transparent 86%); mask-image: linear-gradient(#000, transparent 86%); }
+.lucky-result h2 { position: relative; z-index: 2; margin: 40px 0 16px; color: #fff; font-size: 55px; font-style: italic; text-shadow: 0 4px 0 #a85d32, 0 0 22px #ffca79; }
+.lucky-result.lost h2 { color: #d7e9ff; text-shadow: 0 4px 0 #415a92, 0 0 22px #78caff; }
+.result-card { position: relative; z-index: 2; display: flex; width: 380px; margin: 0 auto; flex-direction: column; align-items: center; }
+.result-card > img { width: 350px; height: 260px; padding: 18px; border: 8px solid #e3b849; background: linear-gradient(180deg, #fff1a5, #d7aa43); object-fit: contain; filter: drop-shadow(0 10px 6px rgba(33,40,81,.34)); clip-path: polygon(7% 0, 93% 0, 100% 8%, 100% 92%, 93% 100%, 7% 100%, 0 92%, 0 8%); animation: result-item-fly .46s .25s cubic-bezier(.1,.76,.22,1) both; }
+.lost .result-card > img { border-color: #70a4d3; background: linear-gradient(180deg, #c8e5ff, #719ec9); }
+.result-card b { margin-top: 12px; font-size: 22px; }
+.result-card span { margin-top: 6px; color: #ffe26c; }
+.result-actions { position: absolute; z-index: 3; right: 0; bottom: 45px; left: 0; display: flex; justify-content: center; gap: 28px; }
+.result-actions button { min-width: 300px; height: 78px; border: 5px solid rgba(255,255,255,.55); color: white; background: linear-gradient(180deg, #d4a424, #9c6c0d); font-size: 24px; cursor: pointer; clip-path: polygon(6% 0, 94% 0, 100% 18%, 100% 82%, 94% 100%, 6% 100%, 0 82%, 0 18%); opacity: 0; transform: translateY(32px); animation: result-action-rise .5s .64s ease forwards; }
+.result-actions button + button { background: linear-gradient(180deg, #e87054, #b23f31); animation-delay: .74s; }
+.result-actions .try-again { background: linear-gradient(180deg, #6b94cc, #425d9c); }
+
+@keyframes lucky-overlay-in { from { opacity: 0; } }
+@keyframes lucky-chest-float { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-7px); } }
+@keyframes lucky-flash { to { filter: brightness(1.35); transform: translate(-50%, -50%) scale(1.12); } }
+@keyframes lucky-card-lock { to { filter: brightness(1.28); transform: scale(1.035); } }
+@keyframes result-grow { from { opacity: 0; transform: scale(.35); } 70% { opacity: 1; } }
+@keyframes result-item-fly { from { opacity: 0; transform: translateX(560px) scale(.9); } }
+@keyframes result-action-rise { to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 1050px) {
+  .lucky-detail-page { padding-right: 32px; padding-left: 32px; }
+  .lucky-chamber { width: calc(100vw - 64px); }
+  .chamber-corner { width: 270px; height: 118px; }
+  .chamber-item-art { width: 176px; height: 72px; }
+  .chamber-item-art.mystery { width: 76px; height: 78px; }
+  .probability-side { --tube-panel-height: 300px; width: 39%; height: var(--tube-panel-height); }
+  .probability-copy { top: 98px; left: 14%; }
+  .probability-side.failure .probability-copy { right: 14%; }
+  .probability-control { right: 20%; left: 20%; }
+}
+
+@media (max-width: 720px) {
+  .lucky-detail-page { padding-right: 12px; padding-left: 12px; }
+  .lucky-chamber { width: 100%; height: 620px; }
+  .lucky-chamber h1 { width: 290px; font-size: 18px; }
+  .chamber-corner { top: 95px; width: 164px; height: 100px; }
+  .chamber-corner.left { left: 3%; }
+  .chamber-corner.right { right: 3%; }
+  .chamber-item-art { top: 6px; width: 112px; height: 58px; }
+  .chamber-item-art.mystery { width: 56px; height: 58px; }
+  .chamber-corner span { right: 8%; bottom: 8px; left: 8%; font-size: 10px; }
+  .probability-side { --tube-panel-height: 280px; bottom: 68px; width: 47%; height: var(--tube-panel-height); }
+  .probability-side.success { left: 1%; }
+  .probability-side.failure { right: 1%; }
+  .probability-copy { top: 90px; left: 12%; }
+  .probability-side.failure .probability-copy { right: 12%; }
+  .probability-copy b { font-size: 20px; }
+  .probability-copy b small { display: none; }
+  .probability-copy strong { font-size: 46px; }
+  .lucky-capsule { top: 175px; width: 220px; height: 220px; }
+  .probability-control { right: 12%; bottom: 80px; left: 12%; }
+  .quality-grid { grid-template-columns: 1fr; }
+  .lucky-roll-frame { width: 98vw; height: 220px; padding: 38px 42px; }
+  .lucky-roll-card { flex-basis: 132px; width: 132px; height: 132px; }
+  .lucky-result { width: 96vw; height: 86vh; }
+  .result-actions { flex-direction: column; align-items: center; gap: 8px; }
+}
