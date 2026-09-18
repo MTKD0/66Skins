@@ -6,7 +6,18 @@ export class GameError extends Error { constructor(message: string, public statu
 export const failure = (error: unknown) => Response.json({ error: error instanceof GameError ? error.message : "服务暂时不可用，请稍后重试" }, { status: error instanceof GameError ? error.status : 500 });
 export function sameOrigin(request: Request) {
   const origin = request.headers.get("origin");
-  if ((origin && origin !== new URL(request.url).origin) || request.headers.get("sec-fetch-site") === "cross-site") throw new GameError("请求来源无效", 403);
+  const requestUrl = new URL(request.url);
+  const allowedOrigins = new Set([requestUrl.origin]);
+  const forwardedHost = request.headers.get("x-forwarded-host")?.split(",")[0]?.trim();
+  const forwardedProto = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim();
+  if (forwardedHost) {
+    try {
+      allowedOrigins.add(new URL(`${forwardedProto || requestUrl.protocol.replace(":", "")}://${forwardedHost}`).origin);
+    } catch {
+      throw new GameError("请求来源无效", 403);
+    }
+  }
+  if ((origin && !allowedOrigins.has(origin)) || request.headers.get("sec-fetch-site") === "cross-site") throw new GameError("请求来源无效", 403);
 }
 const hex = (bytes: ArrayBuffer) => Array.from(new Uint8Array(bytes), n => n.toString(16).padStart(2,"0")).join("");
 const digest = async (value: string) => hex(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value)));
